@@ -1,0 +1,14 @@
+$schema: https://azuremlschemas.azureedge.net/latest/onlineEndpoint.schema.json
+name: fraud-endpoint
+auth_mode: key
+traffic:
+  blue: 100
+deployments:
+  blue:
+    model: azureml:claimsfraud-rf-model:11
+    code_configuration:
+      code: .
+      scoring_script: score.py
+    environment: azureml://registries/azureml/environments/sklearn-1.1/versions/14
+    instance_type: Standard_DS3_v2
+    instance_count: 1

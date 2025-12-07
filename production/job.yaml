@@ -1,0 +1,16 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandJob.schema.json
+type: command
+
+code: .
+command: >-
+  python model.py 
+  --training-data ${{inputs.training_data}}
+
+environment: azureml://registries/azureml/environments/sklearn-1.1/versions/14
+
+inputs:
+  training_data:
+    type: uri_file
+    path: azureml:processed_claims_data:1
+compute: B00986150-0612
+experiment_name: fraud-detection-rfc-training
